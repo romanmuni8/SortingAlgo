@@ -33,7 +33,6 @@ public class MergeSort {
         }
         i=0;
         j=0;
-
         while(i<leftLength && j <rightLength){
             if(l[i]<=r[j]){
                 a[k] = l[i];
@@ -59,7 +58,8 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        int [] a = {3,5,1,0,2,7,10,9,4,8};
+        //int [] a = {3,5,1,0,2,7,10,9,4,8};
+        int [] a = {2,1};
         MergeSort(a,0,a.length-1);
         for( int i = 0 ; i<a.length; i++){
             System.out.println(a[i]);
