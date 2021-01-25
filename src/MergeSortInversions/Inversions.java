@@ -2,7 +2,7 @@ package MergeSortInversions;
 import java.util.*;
 
 public class Inversions {
-
+    public static long inversions =0;
     private static long getNumberOfInversions(int[] a, int[] b, int left, int right) {
         long numberOfInversions = 0;
         if (left>=right) {
@@ -11,14 +11,15 @@ public class Inversions {
         int ave = (left + right) / 2;
         numberOfInversions += getNumberOfInversions(a, b, left, ave);
         numberOfInversions += getNumberOfInversions(a, b, ave+1, right);
-        merge(a,b, left, ave, right);
+        inversions += merge(a,b, left, ave, right);
+        numberOfInversions = inversions;
         return numberOfInversions;
     }
     private static long merge(int[]a, int []b, int left , int ave, int right){
+        int inversions =0;
         for( int j = 0; j < a.length;j++ ){
             b[j] = a[j];
         }
-
         int i = left; // we start merging from this position
         int r = ave+1;
         int l = left;
@@ -28,6 +29,9 @@ public class Inversions {
                 i++;
                 l++;
             }else{
+                // Inversions are happening here
+                inversions += ave - l +1;
+
                 a[i] = b[r];
                 i++;
                 r++;
@@ -49,7 +53,7 @@ public class Inversions {
             r++;
         }
 
-        return 0;
+        return inversions;
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -59,13 +63,13 @@ public class Inversions {
         for (int i = 0; i < n; i++) {
             a[i] = scanner.nextInt();
         }
-
         getNumberOfInversions(a, b, 0, a.length-1);
 
         for (int i = 0; i < n; i++) {
             System.out.println(a[i]);
         }
-        System.out.println(getNumberOfInversions(a, b, 0, a.length-1));
+       System.out.println("Inversions");
+       System.out.println(inversions );
     }
 }
 
